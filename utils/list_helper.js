@@ -12,4 +12,21 @@ const totalLikes = (blogs) => {
   }, 0)
 }
 
-module.exports = { dummy, totalLikes }
+const favorite = (blogs) => {
+  const likes = blogs.map(b => b.likes)
+  //console.log('likes', likes)
+  const max = Math.max(...likes)
+  //console.log('max', max)
+  const fave = blogs.find(b => b.likes === max)
+  //console.log('fave', fave)
+  const formattedFave = {
+    title: fave.title,
+    author: fave.author,
+    likes: fave.likes
+  }
+  //console.log('formatted fave', formattedFave)
+
+  return formattedFave
+}
+
+module.exports = { dummy, favorite, totalLikes }
