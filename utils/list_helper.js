@@ -48,4 +48,24 @@ const mostBlogs = (blogs) => {
   return { author: topAuthor, blogs: maxBlogs }
 }
 
-module.exports = { dummy, favorite, mostBlogs, totalLikes }
+const mostLikes = (blogs) => {
+  const counts = {}
+  blogs.forEach(blog => {
+    console.log(blog.author, blog.likes)
+    counts[blog.author] = (counts[blog.author] || 0) + blog.likes
+  })
+
+  let topAuthor = ''
+  let topLikes = 0
+
+  for (const [author, likes] of Object.entries(counts)) {
+    if (likes > topLikes) {
+      topLikes = likes
+      topAuthor = author
+    }
+  }
+
+  return { author: topAuthor, likes: topLikes }
+}
+
+module.exports = { dummy, favorite, mostBlogs, mostLikes, totalLikes }
