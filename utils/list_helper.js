@@ -29,4 +29,23 @@ const favorite = (blogs) => {
   return formattedFave
 }
 
-module.exports = { dummy, favorite, totalLikes }
+const mostBlogs = (blogs) => {
+  const counts = {}
+  blogs.map(b => b.author).forEach(author => {
+    counts[author] = (counts[author] || 0) + 1
+  })
+  console.log('counts', counts)
+
+  let maxBlogs = 0
+  let topAuthor = ''
+
+  for (const [author, count] of Object.entries(counts)) {
+    if (count > maxBlogs) {
+      maxBlogs = count
+      topAuthor = author
+    }
+  }
+  return { author: topAuthor, blogs: maxBlogs }
+}
+
+module.exports = { dummy, favorite, mostBlogs, totalLikes }
